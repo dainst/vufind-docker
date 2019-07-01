@@ -1,0 +1,6 @@
+[submodule "vufind"]
+	path = vufind
+	url = https://github.com/dainst/vufind
+[submodule "vufind-configs"]
+	path = vufind-configs
+	url = https://github.com/dainst/vufind-configs

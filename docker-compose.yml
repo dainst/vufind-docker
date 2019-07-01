@@ -1,0 +1,49 @@
+version: '3.5'
+
+services:
+  vufind-database:
+    container_name: ${DB_HOST_NAME}
+    build:
+      context: .
+      dockerfile: docker-db/Dockerfile
+      args:
+        MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+        MYSQL_DATABASE_NAME: ${DB_NAME}
+        MYSQL_USER_NAME: ${DB_USER_NAME}
+        MYSQL_USER_PASSWORD: ${DB_USER_PASSWORD}
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+    ports:
+      - "3366:3306"
+    volumes:
+      - ./docker-db/data:/var/lib/mysql
+    networks:
+      - network_1
+
+  vufind-application:
+    container_name: vufind_app
+    build:
+      context: .
+      dockerfile: docker-application/Dockerfile
+    environment:
+      LOCAL_SOLR: ${LOCAL_SOLR}
+      LOCAL_SOLR_USE_SAMPLE_DATA: ${LOCAL_SOLR_USE_SAMPLE_DATA}
+      MYSQL_HOST_NAME: ${DB_HOST_NAME}
+      MYSQL_DATABASE_NAME: ${DB_NAME}
+      MYSQL_USER_NAME: ${DB_USER_NAME}
+      MYSQL_USER_PASSWORD: ${DB_USER_PASSWORD}
+    depends_on:
+      - vufind-database
+    ports:
+      - "8000:80"
+    volumes:
+      - ./vufind:/usr/local/vufind
+      - ./vufind-configs:/usr/local/vufind-configs
+      - ./sample-data:/import
+    networks:
+      - network_1
+
+
+networks:
+  network_1:
+    name: vufind_network
