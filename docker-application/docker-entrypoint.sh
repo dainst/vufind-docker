@@ -7,6 +7,9 @@ cp /usr/local/vufind-configs/config.ini /usr/local/vufind/local/config/vufind/co
 # Besides installing dependencies, set MySQL credentials correctly.
 sed -i 's#mysql://.*#mysql://'"$MYSQL_USER_NAME"':'"$MYSQL_USER_PASSWORD"'@'"$MYSQL_HOST_NAME"'/'"$MYSQL_DATABASE_NAME"'"#g' /usr/local/vufind/local/config/vufind/config.ini
 
+# Fetch mappings used for linking to iDAI.publications
+/usr/local/vufind/local/iDAI.world/fetchMappings.sh
+
 # vendor directory is created while installing dependencies using composer, if the directory is missing run VuFind's
 # installation procedure.
 if [ ! -d "vendor" ]; then
