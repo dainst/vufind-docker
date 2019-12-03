@@ -29,9 +29,7 @@ if [ ! -d "vendor" ]; then
     php composer-setup.php
     rm composer-setup.php
 
-    # Use options because we are running as root, see https://getcomposer.org/root.
-    php composer.phar install --no-plugins --no-scripts
-
+    php composer.phar install
 fi
 
 rm /usr/local/vufind/local/httpd-vufind.conf;
