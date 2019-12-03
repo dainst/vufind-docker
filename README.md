@@ -20,7 +20,15 @@ and
 ```
 git submodule update
 ```
-to initialize this repository's submodules.
+to initialize this repository's submodules. 
+
+You should handle the "detached head" state for both submodules, if you want to work on either by checking out branches. 
+```
+cd vufind
+git checkout zenon
+cd ../vufind-configs
+git checkout master
+```
 
 ### Building the images
 Run
