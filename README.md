@@ -34,3 +34,4 @@ To start containers based on the built images, run
 ```
 docker-compose up
 ```
+The first time you run this script after building, it will take quite some time because the PHP dependencies are installed.
