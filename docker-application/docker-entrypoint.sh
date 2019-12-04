@@ -38,6 +38,12 @@ if [ "$LOCAL_SOLR" = "true" ]; then
     echo "Setting up local Solr-Instance.";
 
     cp /usr/local/vufind-configs/httpd-vufind.conf /usr/local/vufind/local/httpd-vufind.conf;
+
+    if [[ -f  /etc/apache2/conf-enabled/vufind.conf ]]; then
+        rm /etc/apache2/conf-enabled/vufind.conf
+    fi
+    ln -s /usr/local/vufind/local/httpd-vufind.conf /etc/apache2/conf-enabled/vufind.conf
+
     export SOLR_ADDITIONAL_START_OPTIONS="-force" # starting as root gets blocked without -force option
 
     if [ "$LOCAL_SOLR_USE_SAMPLE_DATA" = "true" ]; then
@@ -60,12 +66,13 @@ else
     # Proxy Solr queries to one of the development servers (no local Solr used in this setup)...
     echo "Using proxied Solr-Instance (redirecting search to 195.37.32.11).";
     cp /usr/local/vufind-configs/httpd-vufind-dev-local.conf /usr/local/vufind/local/httpd-vufind.conf;
+
+    if [[ -f  /etc/apache2/conf-enabled/vufind.conf ]]; then
+        rm /etc/apache2/conf-enabled/vufind.conf
+    fi
+    ln -s /usr/local/vufind/local/httpd-vufind.conf /etc/apache2/conf-enabled/vufind.conf
 fi
 
-if [[ -f  /etc/apache2/conf-enabled/vufind.conf ]]; then
-    rm /etc/apache2/conf-enabled/vufind.conf
-fi
-ln -s /usr/local/vufind/local/httpd-vufind.conf /etc/apache2/conf-enabled/vufind.conf
 
 echo "Starting apache2..."
 /usr/sbin/apache2ctl -DFOREGROUND
