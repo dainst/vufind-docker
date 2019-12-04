@@ -37,7 +37,7 @@ rm /usr/local/vufind/local/httpd-vufind.conf;
 if [ "$LOCAL_SOLR" = "true" ]; then
     echo "Setting up local Solr-Instance.";
 
-    cp /usr/local/vufind-configs/httpd-vufind.conf /usr/local/vufind/local/httpd-vufind.conf;
+    cp /usr/local/vufind-configs/httpd-vufind-docker-internal-solr.conf /usr/local/vufind/local/httpd-vufind.conf;
 
     if [[ -f  /etc/apache2/conf-enabled/vufind.conf ]]; then
         rm /etc/apache2/conf-enabled/vufind.conf
@@ -50,7 +50,7 @@ if [ "$LOCAL_SOLR" = "true" ]; then
 
         echo "Using sample data, deleting existing index."
         rm -rf /usr/local/vufind/solr/vufind/biblio/index
-        /usr/local/vufind/solr.sh start SOLR_ADDITIONAL_START_OPTIONS "-force"
+        /usr/local/vufind/solr.sh start SOLR_ADDITIONAL_START_OPTIONS
         # Apache  has to be running for import (provides redirect proxy)
         service apache2 start
         /import/sample_import.sh
@@ -60,12 +60,12 @@ if [ "$LOCAL_SOLR" = "true" ]; then
         echo "Done importing sample data."
     fi
 
-    /usr/local/vufind/solr.sh start SOLR_ADDITIONAL_START_OPTIONS "-force"
+    /usr/local/vufind/solr.sh start SOLR_ADDITIONAL_START_OPTIONS
 
 else
     # Proxy Solr queries to one of the development servers (no local Solr used in this setup)...
     echo "Using proxied Solr-Instance (redirecting search to 195.37.32.11).";
-    cp /usr/local/vufind-configs/httpd-vufind-dev-local.conf /usr/local/vufind/local/httpd-vufind.conf;
+    cp /usr/local/vufind-configs/httpd-vufind-docker-external-solr.conf /usr/local/vufind/local/httpd-vufind.conf;
 
     if [[ -f  /etc/apache2/conf-enabled/vufind.conf ]]; then
         rm /etc/apache2/conf-enabled/vufind.conf
