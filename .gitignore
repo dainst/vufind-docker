@@ -3,3 +3,4 @@
 .env
 docker-db/data
 sample-data/*.mrc
+.vscode/launch.json
