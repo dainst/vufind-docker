@@ -2,4 +2,4 @@
 
 .env
 docker-db/data
-sample-data/*.mrc
+sample-data/**/*.mrc
