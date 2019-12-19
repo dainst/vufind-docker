@@ -18,3 +18,7 @@ cp /import/authority/*.xml /tmp/import_files/authority
 echo "Importing authority sample data..."
 /usr/local/vufind/local/import/import-auth.sh /tmp/import_files/authority/
 echo "Done."
+
+echo "Removing temp directory..."
+rm -r /tmp/import_files
+echo "Done."
