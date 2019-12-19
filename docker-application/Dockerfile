@@ -39,6 +39,9 @@ RUN apt-get update && apt-get dist-upgrade -y && apt-get clean
 RUN apt-get install -y \
 	libapache2-mod-php php-mbstring php-pear php php-dev php-gd php-intl php-json php-ldap php-mysql php-xml php-soap php-curl
 
+# Install Xdebug
+RUN apt-get install php-xdebug
+
 # 3. Install the Java JDK:
 RUN apt-get install -y openjdk-8-jdk
 RUN update-alternatives --config java
