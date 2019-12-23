@@ -43,3 +43,27 @@ To start containers based on the built images, run
 docker-compose up
 ```
 The first time you run this script after building, it will take quite some time because the PHP dependencies are installed.
+
+## Using Xdebug in VSCode with Docker
+
+To enable Xdebug in the docker container the container-settings of the container containing the php environment need this line:
+```
+XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9000 remote_enable=1
+```
+(the current docker-compose.yml allready contains this line)
+
+In the launch settins of VSCode found in .vscode/launch.json add the following to the configurations array:
+
+```
+ {         
+    "name": "Listen for XDebug",
+    "type": "php",
+    "request": "launch",
+    "pathMappings": {
+         "/usr/local/vufind": "/Users/nhempel/DockerProjects/vufind-docker/vufind"
+     },
+    "port": 9000
+ },
+```
+
+To start a debuging session hit the play button under the debuging tap in VSCode.
