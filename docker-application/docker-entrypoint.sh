@@ -64,7 +64,7 @@ if [ "$LOCAL_SOLR" = "true" ]; then
 
 else
     # Proxy Solr queries to one of the development servers (no local Solr used in this setup)...
-    echo "Using proxied Solr-Instance (redirecting search to 195.37.32.11).";
+    echo "Using proxied Solr-Instance (redirecting search to dev server).";
     cp /usr/local/vufind-configs/httpd-vufind-docker-external-solr.conf /usr/local/vufind/local/httpd-vufind.conf;
 
     if [[ -f  /etc/apache2/conf-enabled/vufind.conf ]]; then
