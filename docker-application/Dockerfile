@@ -25,6 +25,10 @@ RUN apt-get install -y \
 	unzip \
 && apt-get update && apt-get dist-upgrade -y && apt-get clean
 
+# Intall pymarc used for preprocessing
+RUN apt-get install -y python3-pip 
+RUN pip3 install pymarc
+
 # 1. Install Apache HTTP Server:
 RUN apt-get install -y apache2
 RUN echo "ServerName" $APACHE_DOMAIN_NAME | tee /etc/apache2/conf-available/fqdn.conf
@@ -60,14 +64,6 @@ RUN mkdir ${VUFIND_CACHE_DIR}
 RUN mkdir ${VUFIND_CACHE_DIR}/cli
 RUN chown -R www-data:www-data ${VUFIND_CACHE_DIR}
 RUN chmod 777 ${VUFIND_CACHE_DIR}/cli
-
-# Can be removed when finally switching to Koha branch. Ruby is used to preprocess data harvested from Aleph and the
-# old status email. --->
-RUN apt-get install -y \
-    build-essential ruby ruby-dev
-
-RUN gem install marc
-# <----!
 
 EXPOSE 80
 
