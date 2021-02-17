@@ -60,7 +60,7 @@ In the launch settins of VSCode found in .vscode/launch.json add the following t
     "type": "php",
     "request": "launch",
     "pathMappings": {
-         "/usr/local/vufind": "/Users/nhempel/DockerProjects/vufind-docker/vufind"
+         "/usr/local/vufind": "/PATH/TO/PROJECT/vufind-docker/vufind"
      },
     "port": 9000
  },
