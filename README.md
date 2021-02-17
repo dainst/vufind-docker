@@ -25,9 +25,9 @@ to initialize this repository's submodules.
 You should handle the "detached head" state for both submodules, if you want to work on either by checking out branches. 
 ```
 cd vufind
-git checkout zenon
+git checkout zenon-koha
 cd ../vufind-configs
-git checkout master
+git checkout zenon-koha
 ```
 
 ### Building the images
