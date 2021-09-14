@@ -38,6 +38,7 @@ services:
       - vufind-database
     ports:
       - "8000:80"
+      - "8001:8080"
     volumes:
       - ./vufind:/usr/local/vufind
       - ./vufind-configs:/usr/local/vufind-configs
